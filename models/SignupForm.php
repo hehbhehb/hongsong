@@ -95,10 +95,12 @@ class SignupForm extends Model
             $user->user_extra1 = $this->user_extra1;
             //上传用户信息图片， 多文件上传， 最多2张图
             $tmpStr2="";
-            //$files = [];
-            $user->files = UploadedFile::getInstances($user, 'files');
-            foreach ($user->files as $file) 
+            $this->files = UploadedFile::getInstances($this, 'files');
+            foreach ($this->files as $file) 
             {
+            //$user->files = UploadedFile::getInstances($user, 'files');
+            //foreach ($user->files as $file) 
+            //{
                 $targetFileId = date("YmdHis").'-'.uniqid();
                 $ext = pathinfo($file->name, PATHINFO_EXTENSION);
                 $targetFileName = "{$targetFileId}.{$ext}";
@@ -106,14 +108,9 @@ class SignupForm extends Model
                 $targetFile = Yii::getAlias('@webroot') . DIRECTORY_SEPARATOR . SignupForm::PHOTO_PATH . DIRECTORY_SEPARATOR . $targetFileName;
                 $file->saveAs($targetFile);
 
-                $tmpStr2 =  $tmpStr2 . "/site1/web/user/photo/{$targetFileName};";
+                $tmpStr2 =  $tmpStr2 . "{$targetFile};";
             }
             $user->user_extra2 = $tmpStr2;
-
-            U::W("++++++++++++++++++++++++++++++++++++++++++++");
-            U::W($user);
-            U::W("============================================");
-
 
             if ($user->save()) {
                 return $user;

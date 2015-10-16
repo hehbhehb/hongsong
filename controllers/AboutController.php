@@ -177,9 +177,6 @@ class AboutController extends Controller
 
             $model->save();
 
-            U::W($tmpStr);
-            U::W($model);
-            U::W("++++++++++++++++++++++++++++++");
             return $this->redirect(['view', 'id' => $model->about_id]);
         } else {
             return $this->render('update', [

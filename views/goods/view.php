@@ -71,7 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'list_img_url:url',
             [
                 'label' => '商品小图',
-                'value' => '<img src=' . $model->list_img_url . '>',
+                'value' => '<img width=90px height=60px src=' . $model->list_img_url . '>',
                 'format'=> 'html',
             ],
             //'body_img_url:url',

@@ -98,7 +98,7 @@ class GoodsController extends Controller
                 $targetFileName = "{$targetFileId}.{$ext}";
                 $targetFile = Yii::getAlias('@webroot') . DIRECTORY_SEPARATOR . MGoods::PHOTO_PATH . DIRECTORY_SEPARATOR . $targetFileName;
                 $model->file->saveAs($targetFile);
-                $tmpStr1 =  "/site1/web/goods/photo/{$targetFileName};";
+                $tmpStr1 =  "{$targetFile};";
             }
             $model->list_img_url = $tmpStr1;
 
