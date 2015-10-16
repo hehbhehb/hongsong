@@ -17,7 +17,6 @@ use app\models\U;
 use  yii\web\UploadedFile;
 
 
-
 /**
  * AboutController implements the CRUD actions for MAbout model.
  */
@@ -117,7 +116,7 @@ class AboutController extends Controller
                 $targetFile = Yii::getAlias('@webroot') . DIRECTORY_SEPARATOR . MAbout::PHOTO_PATH . DIRECTORY_SEPARATOR . $targetFileName;
                 $file->saveAs($targetFile);
 
-                $tmpStr =  $tmpStr . "/site1/web/about/photo/{$targetFileName};";
+                $tmpStr =  $tmpStr . "/hongsong/web/about/photo/{$targetFileName};";
             }
             $model->body_img_url = $tmpStr;
             $model->save();
@@ -170,7 +169,7 @@ class AboutController extends Controller
                     $targetFile = Yii::getAlias('@webroot') . DIRECTORY_SEPARATOR . MAbout::PHOTO_PATH . DIRECTORY_SEPARATOR . $targetFileName;
                     $file->saveAs($targetFile);
 
-                    $tmpStr =  $tmpStr . "/site1/web/about/photo/{$targetFileName};";
+                    $tmpStr =  $tmpStr . "/hongsong/web/about/photo/{$targetFileName};";
                 }
                  $model->body_img_url = $tmpStr;
             }

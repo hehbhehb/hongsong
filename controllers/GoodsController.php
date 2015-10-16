@@ -87,20 +87,20 @@ class GoodsController extends Controller
         $model = new MGoods();
 
         if ($model->load(Yii::$app->request->post())) {
+
             //上传列表小图片， 单文件上传
-            $tmpStr1="";
+            $model->file = UploadedFile::getInstance($model, 'file');
             if(!empty($model->file))
             {
-                $model->file = UploadedFile::getInstance($model, 'file');
                 $targetFileId = date("YmdHis").'-'.uniqid();
                 $ext = pathinfo($model->file->name, PATHINFO_EXTENSION);
-
                 $targetFileName = "{$targetFileId}.{$ext}";
                 $targetFile = Yii::getAlias('@webroot') . DIRECTORY_SEPARATOR . MGoods::PHOTO_PATH . DIRECTORY_SEPARATOR . $targetFileName;
+
                 $model->file->saveAs($targetFile);
-                $tmpStr1 =  "{$targetFile};";
+
+                $model->list_img_url = "/hongsong/web/goods/photo/{$targetFileName}";
             }
-            $model->list_img_url = $tmpStr1;
 
            
             //上传产品大图片图片， 多文件上传， 最多3张图
@@ -115,7 +115,7 @@ class GoodsController extends Controller
                 $targetFile = Yii::getAlias('@webroot') . DIRECTORY_SEPARATOR . MGoods::PHOTO_PATH . DIRECTORY_SEPARATOR . $targetFileName;
                 $file->saveAs($targetFile);
 
-                $tmpStr2 =  $tmpStr2 . "/site1/web/goods/photo/{$targetFileName};";
+                $tmpStr2 =  $tmpStr2 . "/hongsong/web/goods/photo/{$targetFileName};";
             }
             $model->body_img_url = $tmpStr2;
 
@@ -153,7 +153,7 @@ class GoodsController extends Controller
 
                 $model->file->saveAs($targetFile);
 
-                $model->list_img_url = "/site1/web/goods/photo/{$targetFileName}";
+                $model->list_img_url = "/hongsong/web/goods/photo/{$targetFileName}";
             }
 
             //上传产品大图片图片， 多文件上传， 最多3张图
@@ -170,7 +170,7 @@ class GoodsController extends Controller
                     $targetFile = Yii::getAlias('@webroot') . DIRECTORY_SEPARATOR . MGoods::PHOTO_PATH . DIRECTORY_SEPARATOR . $targetFileName;
                     $file->saveAs($targetFile);
 
-                    $tmpStr =  $tmpStr . "/site1/web/goods/photo/{$targetFileName};";
+                    $tmpStr =  $tmpStr . "/hongsong/web/goods/photo/{$targetFileName};";
                 }
                  $model->body_img_url = $tmpStr;
             }
