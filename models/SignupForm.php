@@ -108,7 +108,8 @@ class SignupForm extends Model
                 $targetFile = Yii::getAlias('@webroot') . DIRECTORY_SEPARATOR . SignupForm::PHOTO_PATH . DIRECTORY_SEPARATOR . $targetFileName;
                 $file->saveAs($targetFile);
 
-                $tmpStr2 =  $tmpStr2 . "{$targetFile};";
+                //$tmpStr2 =  $tmpStr2 . "{$targetFile};";
+                $tmpStr2 =  $tmpStr2 . "/hongsong/web/user/photo/{$targetFileName};";
             }
             $user->user_extra2 = $tmpStr2;
 
