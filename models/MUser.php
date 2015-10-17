@@ -61,6 +61,7 @@ class MUser extends \yii\db\ActiveRecord
             'updated_at' => '修改时间',
             'role' => '用户角色',
             'usertype' => '用户类型',
+            'user_extra1' =>'用户附加信息',
         ];
     }
 
@@ -73,4 +74,21 @@ class MUser extends \yii\db\ActiveRecord
     {
         return ($model->role == 1)?"管理员":"会员";
     }
+
+
+    static function getUserExtraInfoPics($model)
+    {
+        $len = 0;
+        $imgHtml = "";
+        $imgs = explode(";",$model->user_extra2);
+        foreach ($imgs as $img) {
+            $len++;
+            if(sizeof($imgs) == $len) break; //分号分割后，数组最后一项为空，剔除
+            $imgHtml = $imgHtml . '<img src=' . $img . ' width=160> &nbsp;&nbsp;&nbsp;&nbsp;';
+        }
+        return $imgHtml;
+    }
+
+
+
 }

@@ -57,6 +57,7 @@ else
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'showOnEmpty'=>false,
         'tableOptions' =>['class' => 'table table-striped'],
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],

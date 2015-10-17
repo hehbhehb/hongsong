@@ -92,6 +92,7 @@ class SignupForm extends Model
             $user->setPassword($this->password);
             $user->generateAuthKey();
 
+            $user->mobile = $this->mobile;
             $user->user_extra1 = $this->user_extra1;
             //上传用户信息图片， 多文件上传， 最多2张图
             $tmpStr2="";

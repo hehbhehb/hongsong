@@ -38,8 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
             //'password_reset_token',
             'email:email',
             'status',
-            'created_at',
-            'updated_at',
+            'created_at:datetime',
+            'updated_at:datetime',
             //'role',
             [
                 'label' => '角色',
@@ -54,6 +54,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format'=> 'html',
             ],
 
+            'user_extra1',
+
+            [
+                'label' => '用户附加图片信息',
+
+                'value' => $model->getUserExtraInfoPics($model),
+                'format'=> 'html',
+            ],
         ],
     ]) ?>
 

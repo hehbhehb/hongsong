@@ -22,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'showOnEmpty'=>false,
         'tableOptions' =>['class' => 'table table-striped'],
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
@@ -34,7 +35,13 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'password_reset_token',
             'email:email',
             // 'status',
-            'created_at',
+            //'created_at',
+            [
+                'value' => function($data) {
+                    return date('Y-m-d H:i:s',$data->created_at); 
+                }
+            ],
+
             // 'updated_at',
             // 'role',
             // 'usertype',
