@@ -5,6 +5,9 @@ use yii\grid\GridView;
 
 use app\models\MGoods;
 use app\models\MGoodsSearch;
+
+use app\models\MUser;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\MGoodsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -83,6 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             // 'body_img_url:url',
+            /*
             [
                 'attribute' => 'body_img_url',
                 'label' => '大图',
@@ -100,6 +104,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },    
                 'headerOptions' => array('style'=>'width:160px;'),      
             ],
+            */
 
 
             // 'quantity',
@@ -118,6 +123,17 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 			*/
             // 'pics_ctrl',
+
+            [
+                'attribute' => 'pub_userid',
+                'label' => '发布者',
+                'value'=>function ($model, $key, $index, $column) { 
+                        //return MGoods::getDetailCtrlOption($model->detail_ctrl); 
+                        $user = MUser::findOne(['id' => $model->pub_userid]);
+                        return empty($user)?"":$user->username;
+                 },
+                'headerOptions' => array('style'=>'width:90px;'),
+            ],
 
             [
                 'attribute' => 'status',

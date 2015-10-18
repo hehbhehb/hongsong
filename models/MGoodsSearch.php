@@ -41,21 +41,34 @@ class MGoodsSearch extends MGoods
      *
      * @return ActiveDataProvider
      */
-    public function search($params, $pub_userid)
+    public function search($params, $pub_userid, $goods_kind)
     {
         //$query = MGoods::find();
 
         if($pub_userid == -1) /*guest*/
         {
-             $query = MGoods::find()->where(['status' => 1]);
+            if($goods_kind == 0)//全部
+                $query = MGoods::find()->where(['status' => 1]);
+            else
+                $query = MGoods::find()->where(['status' => 1, 'goods_kind' => $goods_kind]);
         }
         else
         {
             $user = User::findOne(["id" => $pub_userid]);
             if($user->role == 1)
-                $query = MGoods::find();
+            {
+                if($goods_kind == 0)//全部
+                    $query = MGoods::find();
+                else
+                    $query = MGoods::find()->where(['pub_userid' => $pub_userid, 'goods_kind' => $goods_kind]);
+            }
             else
-                $query = MGoods::find()->where(["pub_userid" => $pub_userid]);  
+            {
+                if($goods_kind == 0)//全部
+                    $query = MGoods::find()->where(['pub_userid' => $pub_userid, 'status' => 1]);  
+                else
+                    $query = MGoods::find()->where(["pub_userid" => $pub_userid, 'status' => 1, 'goods_kind' => $goods_kind]);  
+            }
         }
 
 

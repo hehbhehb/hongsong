@@ -94,11 +94,43 @@ $this->registerJs(
                 </div>
 
                 <div class="form-group">
-                    <?= Html::submitButton('注册', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                    <a href="#"  data-toggle="modal" data-target="#myModal"> 
+                        网站协议
+                    </a>
                 </div>
-                 <?= Html::a('我已是会员, 直接登录', ['site/login']) ?>
+
+                <div class="form-group">
+                    <?= Html::submitButton('我同意协议，免费注册', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <!-- Button trigger modal -->
+                    <!--
+                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal"> 
+                    -->
+                </div>
+
+                 <?= Html::a('我已是会员, 直接登录', ['site/login']) ?> | 
+                 <?= Html::a('意见反馈', ['site/contact']) ?>
             <?php ActiveForm::end(); ?>
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">网站协议</h4>
+      </div>
+      <div class="modal-body">
+        <p>more&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">我知道了</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 

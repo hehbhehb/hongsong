@@ -11,7 +11,7 @@ use app\models\U;
 /* @var $model app\models\MGoods */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => '商品管理', 'url' => ['index', 'pub_userid' => $model->pub_userid]];
+$this->params['breadcrumbs'][] = ['label' => '商品管理', 'url' => ['index', 'pub_userid' => Yii::$app->user->identity->id, 'goods_kind' => 0]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mgoods-view">
@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         //'options' => ['class' => 'table table-striped table-bordered detail-view'],
-        'template' => '<tr><th width=20%>{label}</th><td>{value}</td></tr>',
+        'template' => '<tr><th width=25%>{label}</th><td>{value}</td></tr>',
         //'options' => ['class' => 'table table-striped table-bordered detail-view'],
         'options' => ['class' => 'table table-striped detail-view'],
         'attributes' => [

@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model app\models\MGoods */
 
 $this->title = '修改商品: ' . ' ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => '商品管理', 'url' => ['index', 'pub_userid' => $model->pub_userid]];
+$this->params['breadcrumbs'][] = ['label' => '商品管理', 'url' => ['index', 'pub_userid' => Yii::$app->user->identity->id, 'goods_kind' => 0]];
 //$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->goods_id]];
 $this->params['breadcrumbs'][] = '修改';
 ?>

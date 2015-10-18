@@ -22,14 +22,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'username')->label("用户名") ?>
                 <?= $form->field($model, 'password')->passwordInput()->label("密码") ?>
                 <?= $form->field($model, 'rememberMe')->label("记住")->checkbox() ?>
-                <div style="color:#999;margin:1em 0">
-                    我忘记了密码 <?= Html::a('找回密码', ['site/request-password-reset']) ?>
-                </div>
+
                 <div class="form-group">
                     <?= Html::submitButton('登录', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
 
                 </div>
-                <?= Html::a('免费注册会员', ['site/signup']) ?>
+
+                 <?= Html::a('忘了密码？', ['site/request-password-reset']) ?> | 
+                 <?= Html::a('免费注册会员', ['site/signup']) ?> | 
+                 <?= Html::a('意见反馈', ['site/contact']) ?>
+
             <?php ActiveForm::end(); ?>
         </div>
     </div>

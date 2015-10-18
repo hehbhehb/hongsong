@@ -169,7 +169,8 @@ class AboutController extends Controller
                     $targetFile = Yii::getAlias('@webroot') . DIRECTORY_SEPARATOR . MAbout::PHOTO_PATH . DIRECTORY_SEPARATOR . $targetFileName;
                     $file->saveAs($targetFile);
 
-                    $tmpStr =  $tmpStr . "/hongsong/web/about/photo/{$targetFileName};";
+                    //$tmpStr =  $tmpStr . "/hongsong/web/about/photo/{$targetFileName};";
+                    $tmpStr =  $tmpStr . "/about/photo/{$targetFileName};";
                 }
                  $model->body_img_url = $tmpStr;
             }

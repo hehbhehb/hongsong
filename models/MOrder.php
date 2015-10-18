@@ -53,7 +53,7 @@ class MOrder extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'order_id' => 'Order ID',
+            'order_id' => '订单编号',
             'oid' => '订单号',
             'feesum' => '价格',
             'create_time' => '创建时间',

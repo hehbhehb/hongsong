@@ -16,6 +16,10 @@ use yii\filters\AccessControl;
 use app\models\MAbout;
 use app\models\MGoods;
 use app\models\MGoodsSearch;
+
+use app\models\News;
+use app\models\NewsSearch;
+
 /**
  * Site controller
  */
@@ -192,14 +196,15 @@ class SiteController extends Controller
     }
 
 
-    public function actionClientGoodsList()
+    public function actionClientGoodsList($goods_kind)
     {
         //$g = MGoods::find()->where(['status' => 1])->all();
         //return $this->render('clientGoodsList', ['model' => $g]);
         //guest 视图， 传参数 -1 ， 取状态为已发布的所有商品
         $guest = -1;
+        //$goods_kind = 0;
         $searchModel = new MGoodsSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $guest);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $guest, $goods_kind);
 
         return $this->render('clientGoodsList', [
             'searchModel' => $searchModel,
@@ -208,6 +213,28 @@ class SiteController extends Controller
 
     }
 
+    //前端新闻页面显示
+    public function actionClientNewsList($cat)
+    {
+        //cat 新闻类别 1 行业新闻， 2 公司动态
+        $searchModel = new NewsSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $cat);
+
+        return $this->render('clientNewsList', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+
+    public function actionClientNewsView($id)
+    {
+        $news = News::findOne(['news_id' => $id]);
+        $news->clickcnt ++;
+        $news->save(false);
+
+        return $this->render('clientNewsView', ['model' => $news]);
+    }
 
 
 

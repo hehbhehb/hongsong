@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model app\models\MGoods */
 
 $this->title = '新增商品';
-$this->params['breadcrumbs'][] = ['label' => '商品管理', 'url' => ['index', 'pub_userid' => Yii::$app->user->identity->id]];
+$this->params['breadcrumbs'][] = ['label' => '商品管理', 'url' => ['index', 'pub_userid' => Yii::$app->user->identity->id, 'goods_kind' => 0]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mgoods-create">

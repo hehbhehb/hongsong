@@ -110,7 +110,7 @@ class SignupForm extends Model
                 $file->saveAs($targetFile);
 
                 //$tmpStr2 =  $tmpStr2 . "{$targetFile};";
-                $tmpStr2 =  $tmpStr2 . "/hongsong/web/user/photo/{$targetFileName};";
+                $tmpStr2 =  $tmpStr2 . "/user/photo/{$targetFileName};";
             }
             $user->user_extra2 = $tmpStr2;
 

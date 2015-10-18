@@ -54,10 +54,10 @@ class GoodsController extends Controller
      * Lists all MGoods models.
      * @return mixed
      */
-    public function actionIndex($pub_userid)
+    public function actionIndex($pub_userid, $goods_kind)
     {
         $searchModel = new MGoodsSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $pub_userid);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $pub_userid, $goods_kind);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -99,7 +99,7 @@ class GoodsController extends Controller
 
                 $model->file->saveAs($targetFile);
 
-                $model->list_img_url = "/hongsong/web/goods/photo/{$targetFileName}";
+                $model->list_img_url = "/goods/photo/{$targetFileName}";
             }
 
            
@@ -115,7 +115,7 @@ class GoodsController extends Controller
                 $targetFile = Yii::getAlias('@webroot') . DIRECTORY_SEPARATOR . MGoods::PHOTO_PATH . DIRECTORY_SEPARATOR . $targetFileName;
                 $file->saveAs($targetFile);
 
-                $tmpStr2 =  $tmpStr2 . "/hongsong/web/goods/photo/{$targetFileName};";
+                $tmpStr2 =  $tmpStr2 . "/goods/photo/{$targetFileName};";
             }
             $model->body_img_url = $tmpStr2;
 
@@ -123,7 +123,7 @@ class GoodsController extends Controller
             $model->pub_userid = Yii::$app->user->identity->id;
 
             $model->save();
-            return $this->redirect(['index', 'pub_userid' => Yii::$app->user->identity->id]);
+            return $this->redirect(['index', 'pub_userid' => Yii::$app->user->identity->id, 'goods_kind' => 0]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -153,7 +153,7 @@ class GoodsController extends Controller
 
                 $model->file->saveAs($targetFile);
 
-                $model->list_img_url = "/hongsong/web/goods/photo/{$targetFileName}";
+                $model->list_img_url = "/goods/photo/{$targetFileName}";
             }
 
             //上传产品大图片图片， 多文件上传， 最多3张图
@@ -170,7 +170,7 @@ class GoodsController extends Controller
                     $targetFile = Yii::getAlias('@webroot') . DIRECTORY_SEPARATOR . MGoods::PHOTO_PATH . DIRECTORY_SEPARATOR . $targetFileName;
                     $file->saveAs($targetFile);
 
-                    $tmpStr =  $tmpStr . "/hongsong/web/goods/photo/{$targetFileName};";
+                    $tmpStr =  $tmpStr . "/goods/photo/{$targetFileName};";
                 }
                  $model->body_img_url = $tmpStr;
             }
@@ -197,7 +197,7 @@ class GoodsController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index', 'pub_userid' => Yii::$app->user->identity->id]);
+        return $this->redirect(['index', 'pub_userid' => Yii::$app->user->identity->id, 'goods_kind' => 0]);
     }
 
     /**

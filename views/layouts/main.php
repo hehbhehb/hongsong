@@ -9,6 +9,8 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\models\MAbout;
+use app\models\MGoodscat;
+
 
 AppAsset::register($this);
 
@@ -24,7 +26,7 @@ $about = MAbout::find()->one();
     <LINK href="favicon1.ico" type="image/x-icon" rel=icon>
     <LINK href="favicon1.ico" type="image/x-icon" rel="shortcut icon">
     -->
-
+    <link rel="stylesheet" href="http://libs.useso.com/js/font-awesome/4.2.0/css/font-awesome.min.css">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -53,6 +55,10 @@ $about = MAbout::find()->one();
                 $isMember = true;
             }
         }
+
+        //get goods cat
+        $goodscat = MGoodscat::find()->all();
+
 
         NavBar::begin([
              //'brandLabel' => Html::img($asset->baseUrl . '/logo.png'),
@@ -91,6 +97,14 @@ $about = MAbout::find()->one();
         }
         */
 
+        foreach ($goodscat as $gc) {
+            $menuItems[] = [
+                'label' => '<i class="fa fa-chevron-right"></i> '.$gc->cat,
+                'url' => ['/site/client-goods-list','pub_userid'=>Yii::$app->user->isGuest?-1:Yii::$app->user->identity->id,'goods_kind'=>$gc->value],
+                'linkOptions' => ['data-method' => 'post']
+            ];
+        }
+
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
             'encodeLabels' => false,
@@ -98,18 +112,34 @@ $about = MAbout::find()->one();
             'items' => [
                 ['label' => '首页', 'url' => ['/site/index']],
                 ['label' => '关于', 'url' => ['/site/about']],
-                ['label' => '联系', 'url' => ['/site/contact']],
 
-                ['label' => '商品列表', 'url' => ['/site/client-goods-list']],
+                //['label' => '联系', 'url' => ['/site/contact']],
+                //['label' => '商品列表', 'url' => ['/site/client-goods-list']],
+
+                ($isAdmin)?"":
+                [
+                    'label' => '商品列表',
+                    'items' => $menuItems,
+                ],  
+
+                ($isAdmin)?"":
+                [
+                    'label' => '新闻动态',
+                    'items' => [
+                        ['label' => '<i class="fa fa-chevron-right"></i> 行业新闻','url' => ['/site/client-news-list','cat'=>1],'linkOptions' => ['data-method' => 'post']],
+                        ['label' => '<i class="fa fa-chevron-right"></i> 公司动态','url' => ['/site/client-news-list','cat'=>2],'linkOptions' => ['data-method' => 'post']],
+                    ]
+                ], 
+
 
                 [
                     'label' => '会员',
                     'visible' => $isMember,
                     'items' => [
-                        ['label' => '商品发布','url' => ['/goods/index','pub_userid'=>Yii::$app->user->identity->id],'linkOptions' => ['data-method' => 'post']],
-                        ['label' => '我的订单','url' => ['/order/index','userid'=>Yii::$app->user->identity->id],'linkOptions' => ['data-method' => 'post']],
+                        ['label' => '<i class="fa fa-tags"></i> 商品管理','url' => ['/goods/index','pub_userid'=>Yii::$app->user->identity->id, 'goods_kind' => 0],'linkOptions' => ['data-method' => 'post']],
+                        ['label' => '<i class="fa fa-list"></i> 我的订单','url' => ['/order/index','userid'=>Yii::$app->user->identity->id],'linkOptions' => ['data-method' => 'post']],
                         '<li class="divider"></li>',
-
+                        ['label' => '<i class="fa fa-info-sign"></i> 会员信息','url' => ['/site/userInfo','userid'=>Yii::$app->user->identity->id],'linkOptions' => ['data-method' => 'post']],
                     ]
                 ],   
 
@@ -117,11 +147,12 @@ $about = MAbout::find()->one();
                     'label' => '管理',
                     'visible' => $isAdmin,
                     'items' => [
-                        ['label' => '网站配置','url' => ['/about/index'],'linkOptions' => ['data-method' => 'post']],
-                        ['label' => '用户管理','url' => ['/user/index'],'linkOptions' => ['data-method' => 'post']],
-                        ['label' => '商品管理','url' => ['/goods/index','pub_userid'=>Yii::$app->user->identity->id],'linkOptions' => ['data-method' => 'post']],
-                        ['label' => '订单管理','url' => ['/order/index','userid'=>Yii::$app->user->identity->id],'linkOptions' => ['data-method' => 'post']],
+                        ['label' => '<i class="fa fa-user"></i> 用户管理','url' => ['/user/index'],'linkOptions' => ['data-method' => 'post']],
+                        ['label' => '<i class="fa fa-tags"></i> 商品管理','url' => ['/goods/index','pub_userid'=>Yii::$app->user->identity->id, 'goods_kind' => 0],'linkOptions' => ['data-method' => 'post']],
+                        ['label' => '<i class="fa fa-list"></i> 订单管理','url' => ['/order/index','userid'=>Yii::$app->user->identity->id],'linkOptions' => ['data-method' => 'post']],
                         '<li class="divider"></li>',
+                        ['label' => '<i class="fa fa-newspaper-o"></i> 新闻管理','url' => ['/news/index', 'cat' => 0],'linkOptions' => ['data-method' => 'post']],
+                        ['label' => '<i class="fa fa-cog"></i> 网站配置','url' => ['/about/index'],'linkOptions' => ['data-method' => 'post']],
 
                     ]
                 ],      
@@ -133,7 +164,7 @@ $about = MAbout::find()->one();
                     'items' => [
                         //['label' => '修改设置','url' => ['/site/profile'],'linkOptions' => ['data-method' => 'post']],
                         //'<li class="divider"></li>',
-                        ['label' => '退出','url' => ['/site/logout'],'linkOptions' => ['data-method' => 'post']],
+                        ['label' => '<i class="fa  fa-sign-out"></i> 退出','url' => ['/site/logout'],'linkOptions' => ['data-method' => 'post']],
                     ]
                 ],
 
