@@ -10,7 +10,7 @@ $this->title = 'demo';
 
     <!--
     <div class="jumbotron">
-        <h1>Congratulations!</h1>
+        <h4>Congratulations!</h4>
 
         <p class="lead">You have successfully created your Yii-powered application.</p>
 

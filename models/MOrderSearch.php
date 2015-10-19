@@ -45,9 +45,9 @@ class MOrderSearch extends MOrder
         $user = User::findOne(["id" => $userid]);
 
         if($user->role == 1)
-            $query = MOrder::find();
+            $query = MOrder::find()->orderBy(['create_time' => SORT_DESC]);
         else
-            $query = MOrder::find()->where(["userid" => $user->id]);
+            $query = MOrder::find()->where(["userid" => $user->id])->orderBy(['create_time' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

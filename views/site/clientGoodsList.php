@@ -5,20 +5,24 @@ use yii\grid\GridView;
 
 use app\models\MGoods;
 use app\models\MGoodsSearch;
+
+use app\models\MGoodscat;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\MGoodsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 use app\models\U;
 
+$goods_kind = $_GET["goods_kind"];
+$goodscat = MGoodscat::findOne(['value' => $goods_kind]);
 
-$this->title = '商品列表';
+$this->title = '商品列表'
 //$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div class="mgoods-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h4><?= Html::encode($this->title) ?> | <?= empty($goodscat)?'':$goodscat->cat ?></h4>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <!--
@@ -41,23 +45,27 @@ $this->title = '商品列表';
             //['class' => 'yii\grid\SerialColumn'],
 
             //'goods_id',
+            /*
             [
                 'attribute' => 'goods_id',
                 'label' => '商品编号',
                 'headerOptions' => array('style'=>'width:50px;'),
             ],
+            */
 
             [
                 'attribute' => 'list_img_url',
                 'label' => '仪表图',
                 'format' => 'html',
                 'value' => function($model, $key, $index, $column){
-                        return '<img src=' . $model->list_img_url .' width=120px height=90px>';
+                    //return '<img src=' . $model->list_img_url .' width=120px height=90px>';
+                    return Html::a('<img src=' . $model->list_img_url .' width=120px height=90px>', 'index.php?r=site%2Fclient-goods-view&id='.$model->goods_id);
                 },  
                 'headerOptions' => array('style'=>'width:80px;'),        
             ],
             'title',
             //'goods_kind',
+            /*
             [
                 'attribute' => 'goods_kind',
                 'label' => '分类',
@@ -67,6 +75,7 @@ $this->title = '商品列表';
                 'filter'=> MGoods::getGoodsKindOption(),
                 'headerOptions' => array('style'=>'width:120px;'),
             ],
+            */
             //'descript',
             [
                 'attribute' => 'create_time',
@@ -148,6 +157,8 @@ $this->title = '商品列表';
             ],
             */
 
+
+            /*
             [
                 'class' => 'yii\grid\ActionColumn',
 
@@ -162,6 +173,7 @@ $this->title = '商品列表';
             
                 ],
             ],
+            */
 
 
 

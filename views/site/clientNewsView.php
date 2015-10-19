@@ -15,9 +15,15 @@ use app\models\MGoods;
 //$this->params['breadcrumbs'][] = ['label' => '商品管理', 'url' => ['index', 'pub_userid' => $model->pub_userid]];
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<style type="text/css">
+    img {
+        width: 100%;
+    }
+</style>
 <div class="mgoods-view">
 
-    <h2><?= Html::encode($model->title) ?></h2>
+    <h4><?= Html::encode($model->title) ?></h4>
 
 
     <?= DetailView::widget([
@@ -28,23 +34,29 @@ use app\models\MGoods;
         'attributes' => [
             'news_id',
             'title',
-            //'content:ntext',
-            [
-                'attribute' => 'content',
-                'format'=> 'html',
-            ],
-            'create_time',
-            'update_time',
             //'cat',
             [
                 'label' => '类别',
                 'value' => $model->getCat($model),
                 'format'=> 'html',
             ],
+            'create_time',
+            'update_time',
             'clickcnt',
+            //'content:ntext',
+            /*
+            [
+                'attribute' => 'content',
+                'format'=> 'html',
+            ],
+            */
+
+
         ],
     ]) ?>
 
+
+    <?= $model->content ?>
 </div>
 
 

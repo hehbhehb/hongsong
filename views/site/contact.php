@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php } ?>
 
 <div class="site-contact">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h4><?= Html::encode($this->title) ?></h4>
 
     <p>
         如果您有任何业务问题咨询或宝贵建议，请留言，以便我们和您保持联系哦！谢谢。

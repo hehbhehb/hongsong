@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="news-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h4><?= Html::encode($this->title) ?></h4>
 
     <p>
         <?= Html::a('修改', ['update', 'id' => $model->news_id], ['class' => 'btn btn-primary']) ?>

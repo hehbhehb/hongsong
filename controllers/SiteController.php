@@ -20,6 +20,9 @@ use app\models\MGoodsSearch;
 use app\models\News;
 use app\models\NewsSearch;
 
+use app\models\MUser;
+
+
 /**
  * Site controller
  */
@@ -234,6 +237,13 @@ class SiteController extends Controller
         $news->save(false);
 
         return $this->render('clientNewsView', ['model' => $news]);
+    }
+
+    public function actionClientUserView($id)
+    {
+        $user = MUser::findOne(['id' => $id]);
+
+        return $this->render('clientUserView', ['model' => $user]);
     }
 
 

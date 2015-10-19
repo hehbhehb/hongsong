@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mgoods-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h4><?= Html::encode($this->title) ?></h4>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>

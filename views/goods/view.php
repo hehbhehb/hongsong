@@ -12,18 +12,18 @@ use app\models\U;
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => '商品管理', 'url' => ['index', 'pub_userid' => Yii::$app->user->identity->id, 'goods_kind' => 0]];
-$this->params['breadcrumbs'][] = $this->title;
+//$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mgoods-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h4><?= Html::encode($this->title) ?></h4>
 
     <p>
         <?= Html::a('修改', ['update', 'id' => $model->goods_id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('删除', ['delete', 'id' => $model->goods_id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => '删除这个商品，确定?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -69,11 +69,13 @@ $this->params['breadcrumbs'][] = $this->title;
             //'price_hint',
             //'price_old',
             //'list_img_url:url',
+            /*
             [
                 'label' => '商品小图',
                 'value' => '<img width=90px height=60px src=' . $model->list_img_url . '>',
                 'format'=> 'html',
             ],
+            */
             //'body_img_url:url',
             
             [

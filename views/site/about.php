@@ -5,6 +5,11 @@ use yii\helpers\Html;
 $this->title = '公司介绍';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<style type="text/css">
+    img {
+        width: 100%;
+    }
+</style>
 <div class="site-about">
 	<!--
     <h3><//?= empty($about)?"":$about->com_name ?></h3>

@@ -45,13 +45,13 @@ class News extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'news_id' => '新闻编号',
+            'news_id' => '编号',
             'title' => '标题',
             'content' => '内容',
-            'create_time' => '创建时间',
-            'update_time' => '更新时间',
+            'create_time' => '创建',
+            'update_time' => '更新',
             'cat' => '类别',
-            'clickcnt' => '阅读量',
+            'clickcnt' => '阅读',
         ];
     }
 

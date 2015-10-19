@@ -10,6 +10,9 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\models\MAbout;
 use app\models\MGoodscat;
+use app\models\MGoods;
+
+
 
 
 AppAsset::register($this);
@@ -28,7 +31,7 @@ $about = MAbout::find()->one();
     -->
     <link rel="stylesheet" href="http://libs.useso.com/js/font-awesome/4.2.0/css/font-awesome.min.css">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <title>首页</title>
     <?php $this->head() ?>
 </head>
 <body>
@@ -98,11 +101,28 @@ $about = MAbout::find()->one();
         */
 
         foreach ($goodscat as $gc) {
-            $menuItems[] = [
-                'label' => '<i class="fa fa-chevron-right"></i> '.$gc->cat,
-                'url' => ['/site/client-goods-list','pub_userid'=>Yii::$app->user->isGuest?-1:Yii::$app->user->identity->id,'goods_kind'=>$gc->value],
-                'linkOptions' => ['data-method' => 'post']
-            ];
+            if($gc->value == 0)/*全部*/
+                $goodsCnt = MGoods::find()->where(['status' => 1])->count();
+            else
+                $goodsCnt = MGoods::find()->where(['status' => 1, 'goods_kind' => $gc->value])->count();
+
+            if($goodsCnt == 0)
+            {
+                $menuItems[] = [
+                    'label' => '<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> '.$gc->cat,
+                    'url' => ['/site/client-goods-list','pub_userid'=>Yii::$app->user->isGuest?-1:Yii::$app->user->identity->id,'goods_kind'=>$gc->value],
+                    'linkOptions' => ['data-method' => 'post']
+                ];
+            }
+            else
+            {
+                $menuItems[] = [
+                    'label' => '<span class="badge">'.$goodsCnt.'</span> '.$gc->cat,
+                    'url' => ['/site/client-goods-list','pub_userid'=>Yii::$app->user->isGuest?-1:Yii::$app->user->identity->id,'goods_kind'=>$gc->value],
+                    'linkOptions' => ['data-method' => 'post']
+                ];
+            }
+
         }
 
         echo Nav::widget([
@@ -139,7 +159,7 @@ $about = MAbout::find()->one();
                         ['label' => '<i class="fa fa-tags"></i> 商品管理','url' => ['/goods/index','pub_userid'=>Yii::$app->user->identity->id, 'goods_kind' => 0],'linkOptions' => ['data-method' => 'post']],
                         ['label' => '<i class="fa fa-list"></i> 我的订单','url' => ['/order/index','userid'=>Yii::$app->user->identity->id],'linkOptions' => ['data-method' => 'post']],
                         '<li class="divider"></li>',
-                        ['label' => '<i class="fa fa-info-sign"></i> 会员信息','url' => ['/site/userInfo','userid'=>Yii::$app->user->identity->id],'linkOptions' => ['data-method' => 'post']],
+                        ['label' => '<i class="fa fa-user"></i> 会员信息','url' => ['/site/client-user-view','id'=>Yii::$app->user->identity->id],'linkOptions' => ['data-method' => 'post']],
                     ]
                 ],   
 
@@ -184,15 +204,20 @@ $about = MAbout::find()->one();
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">
-        <span class="glyphicon glyphicon-globe"></span>
-        <?= empty($about->com_name)?"":$about->com_name ?>&copy; <?= date('Y') ?> 
-        &nbsp;&nbsp;
-        <span class="glyphicon glyphicon-home"></span>
-        <?= empty($about->com_addr)?"":$about->com_addr ?></p>
-        &nbsp;&nbsp;
-        <span class="glyphicon glyphicon-earphone"></span>
-        <?= empty($about->com_addr)?"":$about->com_tel ?></p>
+
+        <p align="center">
+            <span class="glyphicon glyphicon-globe"></span>
+            <?= empty($about->com_name)?"":$about->com_name ?>&copy; <?= date('Y') ?> 
+            <br>
+            <span class="glyphicon glyphicon-home"></span>
+            <?= empty($about->com_addr)?"":$about->com_addr ?>
+            &nbsp;&nbsp;
+
+            <span class="glyphicon glyphicon-earphone"></span>
+            <a href="tel:<?= empty($about->com_tel)?'':$about->com_addr ?>">
+            <?= empty($about->com_addr)?"":$about->com_tel ?>
+            </a>
+        </p>
 		<!--
         <p class="pull-right"><//?= Yii::powered() ?></p>
 		-->

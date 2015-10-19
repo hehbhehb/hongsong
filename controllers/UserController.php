@@ -14,6 +14,23 @@ use yii\filters\VerbFilter;
  */
 class UserController extends Controller
 {
+    public function beforeAction($action)
+    {
+
+        if(Yii::$app->user->isGuest)
+        {
+            //$isAdmin = false;
+            //$isMember = false;
+            return $this->redirect(['site/login']);
+        }
+        else
+        {
+            //
+        }
+
+        return true;
+    }
+
     public function behaviors()
     {
         return [

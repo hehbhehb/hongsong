@@ -132,14 +132,14 @@ class MGoods extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'goods_id' => '商品编号',
-            'title' => '商品名',
+            'goods_id' => '编号',
+            'title' => '品名',
             'descript' => '描述',
             'price' => '现价',
             'price_hint' => '现价提示语',
             'price_old' => '市场价',
-            'detail' => '商品详情',
-            'list_img_url' => '商品小图',
+            'detail' => '详情',
+            'list_img_url' => '图片',
             'body_img_url' => '商品图',
             'quantity' => '数量',
             'file' => '小图',

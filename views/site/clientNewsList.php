@@ -18,7 +18,7 @@ $this->title = '新闻列表';
 ?>
 <div class="News-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h4><?= Html::encode($this->title) ?></h4>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <!--
@@ -40,7 +40,7 @@ $this->title = '新闻列表';
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
 
-            'news_id',
+            //'news_id',
             'title',
             //'content:ntext',
             'create_time',

@@ -15,22 +15,18 @@ use app\models\MGoods;
 //$this->params['breadcrumbs'][] = ['label' => '商品管理', 'url' => ['index', 'pub_userid' => $model->pub_userid]];
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<style type="text/css">
+    img {
+        width: 100%;
+    }
+</style>
+
 <div class="mgoods-view">
 
-    <div class="alert alert-danger" role="alert" id="hint">
-          <?= Html::a('请先登录 >>', ['site/login']) ?>
-    </div>
-    <div class="alert alert-success" role="alert" id="order">
-          租借申请订单已生成  &nbsp;&nbsp;<?= Html::a('我的订单 >>', ['order/index','userid'=>Yii::$app->user->identity->id]) ?>
-    </div>
-    <h2><?= Html::encode($model->title) ?></h2>
-    <div class="alert alert-warning" role="alert">
-        <button type="button" class="btn btn-success btn-lg" id="zujie" style="height:60px;width:140px">我要租借</button>
-        <!--
-        &nbsp;&nbsp;
-        <button type="button" class="btn btn-danger btn-lg" id="dyj100" style="height:80px">100元代金券 (-10000分)</button>
-        -->
-    </div>
+    <h4><?= Html::encode($model->title) ?></h4>
+
+    <img style="width: 80% " src='<?= $model->list_img_url?>' >
 
     <?= DetailView::widget([
         'model' => $model,
@@ -39,6 +35,14 @@ use app\models\MGoods;
         'options' => ['class' => 'table table-striped detail-view'],
         'attributes' => [
             //'goods_id',
+            /*
+            [
+                'label' => '商品小图',
+                'value' => '<img src=' . $model->list_img_url . '>',
+                'format'=> 'html',
+            ],
+            */
+
             'title',
             /*
             [
@@ -63,12 +67,9 @@ use app\models\MGoods;
             //'price_old',
             //'list_img_url:url',
 
+
             /*
-            [
-                'label' => '商品小图',
-                'value' => '<img src=' . $model->list_img_url . '>',
-                'format'=> 'html',
-            ],
+  
             //'body_img_url:url',
             
             [
@@ -79,15 +80,36 @@ use app\models\MGoods;
             */
 
             //'detail:ntext',
+            /*
             [
                 'attribute' => 'detail',
                 'format'=> 'html',
             ],
+            */
 
 
             //'quantity',
         ],
     ]) ?>
+
+    <?= $model->detail ?>
+    <center>
+    <!--
+    <button type="button" class="btn btn-success btn-lg" id="zujie" style="height:50px;width:160px">我要租借</button>
+    -->
+    <button type="button" class="btn btn-success btn-lg btn-block" id="zujie">我要租借</button>
+    <!--
+    &nbsp;&nbsp;
+    <button type="button" class="btn btn-danger btn-lg" id="dyj100" style="height:80px">100元代金券 (-10000分)</button>
+    -->
+    </center>
+    <br>
+    <div class="alert alert-danger" role="alert" id="hint">
+          <?= Html::a('请先登录 >>', ['site/login']) ?>
+    </div>
+    <div class="alert alert-success" role="alert" id="order">
+          租借申请订单已生成  &nbsp;&nbsp;<?= Html::a('我的订单 >>', ['order/index','userid'=>Yii::$app->user->identity->id]) ?>
+    </div>
 
 </div>
 
@@ -112,7 +134,8 @@ use app\models\MGoods;
                 if(isGuest == 1)
                 {
                     //alert("you are guest");
-                    $("#hint").show();
+                    //$("#hint").show();
+                    location.href = '<?php echo Url::to(["site/login"]); ?>';
                     return false;
                 }
                 else

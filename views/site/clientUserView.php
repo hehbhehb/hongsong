@@ -3,30 +3,32 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
+use yii\helpers\Url;
+use app\models\U;
+
+use app\models\MGoods;
+use app\models\MUser;
 /* @var $this yii\web\View */
-/* @var $model app\models\MUser */
+/* @var $model app\models\MGoods */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => '用户管理', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+//$this->title = $model->title;
+//$this->params['breadcrumbs'][] = ['label' => '商品管理', 'url' => ['index', 'pub_userid' => $model->pub_userid]];
+//$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="muser-view">
 
-    <h4><?= Html::encode($this->title) ?></h4>
+<style type="text/css">
+    img {
+        width: 100%;
+    }
+</style>
 
-    <p>
-        <?= Html::a('修改', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('删除', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => '删除该用户，确定?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+<div class="mgoods-view">
+
+    <h4>会员信息</h4>
 
     <?= DetailView::widget([
         'model' => $model,
+        //'options' => ['class' => 'table table-striped table-bordered detail-view'],
         'template' => '<tr><th width=20%>{label}</th><td>{value}</td></tr>',
         'options' => ['class' => 'table table-striped detail-view'],
         'attributes' => [
@@ -37,9 +39,9 @@ $this->params['breadcrumbs'][] = $this->title;
             //'password_hash',
             //'password_reset_token',
             'email:email',
-            'status',
+            //'status',
             'created_at:datetime',
-            'updated_at:datetime',
+            //'updated_at:datetime',
             //'role',
             [
                 'label' => '角色',
@@ -62,7 +64,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => $model->getUserExtraInfoPics($model),
                 'format'=> 'html',
             ],
+
+            //'quantity',
         ],
     ]) ?>
 
 </div>
+
+
+<script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+  
+</script>

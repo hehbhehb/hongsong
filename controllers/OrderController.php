@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use app\models\U;
 /**
  * OrderController implements the CRUD actions for MOrder model.
  */
@@ -111,8 +112,10 @@ class OrderController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        U::W("+++++++++++++++++++++actionUpdate++++++++++++++++++++++++++++");
+        if ($model->load(Yii::$app->request->post())) {
+            U::W($model);
+            $model->save(false);
             return $this->redirect(['view', 'id' => $model->order_id]);
         } else {
             return $this->render('update', [
