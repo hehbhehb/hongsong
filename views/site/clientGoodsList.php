@@ -84,6 +84,7 @@ $this->title = '商品列表'
                 //'format' =>  ['date', 'php:Y-m-d'],
                 'headerOptions' => array('style'=>'width:120px;'),
             ],
+            
 
             //'price',
             //[

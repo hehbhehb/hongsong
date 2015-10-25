@@ -24,7 +24,19 @@ $about = MAbout::find()->one();
 <html lang="<?= Yii::$app->language ?>">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
+
+    <!--
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    -->
+
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+
     <!--
     <LINK href="favicon1.ico" type="image/x-icon" rel=icon>
     <LINK href="favicon1.ico" type="image/x-icon" rel="shortcut icon">
@@ -214,8 +226,8 @@ $about = MAbout::find()->one();
             &nbsp;&nbsp;
 
             <span class="glyphicon glyphicon-earphone"></span>
-            <a href="tel:<?= empty($about->com_tel)?'':$about->com_addr ?>">
-            <?= empty($about->com_addr)?"":$about->com_tel ?>
+            <a href="tel:<?= empty($about->com_tel)?'':$about->com_tel ?>">
+            <?= empty($about->com_tel)?"":$about->com_tel ?>
             </a>
         </p>
 		<!--

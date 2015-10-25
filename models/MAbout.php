@@ -36,10 +36,10 @@ class MAbout extends \yii\db\ActiveRecord
     {
         return [
             [['com_name', 'com_addr', 'com_tel', 'com_voice', 'com_content'], 'required'],
-            [['com_tel'], 'integer'],
             [['com_content'], 'string'],
             [['com_name', 'com_addr'], 'string', 'max' => 128],
             [['com_voice'], 'string', 'max' => 256],
+            [['com_tel'], 'string', 'max' => 32],
             [['body_img_url'], 'string', 'max' => 512],
             [['body_img_url', 'files'], 'safe'],
             [['files'], 'file', 'maxFiles' => 10],

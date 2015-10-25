@@ -77,7 +77,7 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        $goods = MGoods::find()->where(['status' => 1])->orderBy(['create_time' => DESC])->limit(3)->all();
+        $goods = MGoods::find()->where(['status' => 1])->orderBy(['create_time' => DESC])->limit(24)->all();
         $about = MAbout::find()->one();
 
         return $this->render('index',['goods' => $goods, 'about' => $about]);

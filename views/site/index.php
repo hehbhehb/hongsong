@@ -86,19 +86,23 @@ $this->title = 'demo';
 </div>
 
     <div class="body-content">
-
       <br>
-      <div class="row">
+
         <?php 
+          $n = 0;
           foreach ($goods as $g) 
           {
         ?>
-          <div class="col-sm-6 col-md-4">
+        <?php if($n%4 == 0) {?>
+              <div class="row">
+        <?php } ?>
+          <div class="col-xs-12 col-md-3">
             <div class="thumbnail">
               <img src="<?= $g->list_img_url ?>" alt="<?= $g->title ?>">
               <div class="caption">
                 <h3><?= $g->title ?></h3>
-                <p><?= $g->descript ?></p>
+
+                <p><?=  mb_substr($g->descript, 0, 32, 'utf-8')."..."  ?></p>
                
                 <p>
                  <?= Html::a('更多', ['site/client-goods-view', 'id' => $g->goods_id], ['class' => 'btn btn-primary']) ?>
@@ -106,11 +110,12 @@ $this->title = 'demo';
               </div>
             </div>
           </div>
+        <?php if(($n+1)%4 == 0) {?>
+            </div>
+        <?php } ?>
         <?php
+            $n = $n + 1;
           }
         ?>
-      </div>
-    </div>
 
-    </div>
-</div>
+  </div>
