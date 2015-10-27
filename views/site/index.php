@@ -88,6 +88,18 @@ $this->title = 'demo';
     <div class="body-content">
       <br>
 
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3>
+          仪表展示
+          &nbsp;&nbsp;
+          <small>
+             <?= Html::a('更多 >>', ['#']) ?>
+          </small>
+        </h3>
+      </div>
+
+      <div class="panel-body">
         <?php 
           $n = 0;
           foreach ($goods as $g) 
@@ -98,15 +110,21 @@ $this->title = 'demo';
         <?php } ?>
           <div class="col-xs-12 col-md-3">
             <div class="thumbnail">
-              <img src="<?= $g->list_img_url ?>" alt="<?= $g->title ?>">
+              <!--
+              <img src="<//?= $g->list_img_url ?>" alt="<//?= $g->title ?>">
+              -->
+              <?= Html::a('<img src='. $g->list_img_url. '>', ['site/client-goods-view', 'id' => $g->goods_id]) ?>
+              
               <div class="caption">
-                <h3><?= $g->title ?></h3>
+                <h4><?=  mb_substr($g->title, 0, 20, 'utf-8')."..."  ?></h4>
 
                 <p><?=  mb_substr($g->descript, 0, 32, 'utf-8')."..."  ?></p>
                
+               <!--
                 <p>
-                 <?= Html::a('更多', ['site/client-goods-view', 'id' => $g->goods_id], ['class' => 'btn btn-primary']) ?>
+                 <//?= Html::a('更多', ['site/client-goods-view', 'id' => $g->goods_id], ['class' => 'btn btn-primary']) ?>
                 </p>
+                -->
               </div>
             </div>
           </div>
@@ -116,6 +134,50 @@ $this->title = 'demo';
         <?php
             $n = $n + 1;
           }
-        ?>
+        ?> 
+
+      </div>
+    </div>
+    <!-- -->
+
+      <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3>
+          最新资讯
+          &nbsp;&nbsp;
+          <small>
+             <?= Html::a('更多 >>', ['#']) ?>
+          </small>
+        </h3>
+      </div>
+
+      <div class="panel-body">
+
+
+      </div>
+    </div>
+
+
+    <!-- -->
+
+      <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3>
+          活动公告
+          &nbsp;&nbsp;
+          <small>
+             <?= Html::a('更多 >>', ['#']) ?>
+          </small>
+        </h3>
+      </div>
+
+      <div class="panel-body">
+
+
+      </div>
+    </div>
+
+
+
 
   </div>

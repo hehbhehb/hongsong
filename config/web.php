@@ -24,6 +24,7 @@ $config = [
             'errorAction' => 'site/error',
         ],
 
+        /*
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             //'viewPath' => '@app/mailer',
@@ -32,21 +33,47 @@ $config = [
             // for the mailer to send real emails.
             'useFileTransport' => true,
         ],
-
-        /*
-        'mail' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            'useFileTransport' =>false,
-            'transport' => [
-                'class' => 'Swift_SmtpTransport',
-                'host' => 'smtp.qq.com',
-                'username' => 'zengkai001@qq.com',
-                'password' => '***',
-                'port' => '465',
-                'encryption' => 'tls',
-            ],
-        ],
         */
+
+         'mailer' => [
+                'class' => 'yii\swiftmailer\Mailer',            
+                //'viewPath' => '@common/mail',
+                /*            
+                            // send all mails to a file by default. You have to set
+                            // 'useFileTransport' to false and configure a transport
+                            // for the mailer to send real emails.
+                            'useFileTransport' => true,
+                */            
+
+                /*
+                'transport' => [
+                    'class' => 'Swift_SmtpTransport',
+                    'host' => 'smtp.163.com',
+                    'username' => 'kzeng_pub@163.com',
+                    'password' => 'kzeng123',
+                    'port' => '25',
+                    //'port' => '587',
+                    //'encryption' => 'tls',
+                ],
+                */
+
+                'transport' => [
+                    'class' => 'Swift_SmtpTransport',
+                    'host' => 'smtp.qq.com',
+                    'username' => 'zengkai001@qq.com',
+                    'password' => 'zk19810825',
+                    'port' => '465',
+                    'encryption' => 'ssl',
+                ],
+
+                'messageConfig' => [
+                     'charset' => 'UTF-8',
+                     'from' => ['zengkai001@qq.com'=>'admin'],
+                ],
+                
+         ],
+
+
 
 
 

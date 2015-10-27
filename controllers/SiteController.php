@@ -246,6 +246,18 @@ class SiteController extends Controller
         return $this->render('clientUserView', ['model' => $user]);
     }
 
-
+    public function actionMail()
+    {
+        //邮件发送
+        $mail = Yii::$app->mailer->compose();
+        $mail->setTo('zengkai001@163.com');
+        $mail->setSubject('邮箱测试');
+        $mail->setHtmlBody('asgdadgagadhdrhasdsadsadasearharhae');
+        if($mail->send()){
+            echo '成功';
+        }else{
+            echo '失败';
+        }
+    }
 
 }

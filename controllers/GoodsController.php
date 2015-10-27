@@ -123,6 +123,21 @@ class GoodsController extends Controller
             $model->pub_userid = Yii::$app->user->identity->id;
 
             $model->save();
+
+            //邮件发送
+            $mail = Yii::$app->mailer->compose();
+            $mail->setTo('1443594559@qq.com');//send to gtsun
+            //$mail->setTo('zengkai001@163.com');//send to kzeng
+            $mail->setSubject('有新商品发布，请审核');
+            $mail->setHtmlBody('商品名 '.$model->title);
+            if($mail->send()){
+                //echo '成功';
+                U::W("===========mail send ok ==============");
+            }else{
+                //echo '失败';
+                U::W("===========mail send failed ==============");
+            }
+
             return $this->redirect(['index', 'pub_userid' => Yii::$app->user->identity->id, 'goods_kind' => 0]);
         } else {
             return $this->render('create', [

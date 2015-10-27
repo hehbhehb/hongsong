@@ -54,7 +54,7 @@ class MGoodsSearch extends MGoods
         }
         else
         {
-            $user = User::findOne(["id" => $pub_userid]);
+            $user = User::findOne(['id' => $pub_userid]);
             if($user->role == 1)
             {
                 if($goods_kind == 0)//全部
@@ -65,9 +65,9 @@ class MGoodsSearch extends MGoods
             else
             {
                 if($goods_kind == 0)//全部
-                    $query = MGoods::find()->where(['pub_userid' => $pub_userid, 'status' => 1]);  
+                    $query = MGoods::find()->where(['pub_userid' => $pub_userid]);  
                 else
-                    $query = MGoods::find()->where(["pub_userid" => $pub_userid, 'status' => 1, 'goods_kind' => $goods_kind]);  
+                    $query = MGoods::find()->where(["pub_userid" => $pub_userid, 'goods_kind' => $goods_kind]);  
             }
         }
 

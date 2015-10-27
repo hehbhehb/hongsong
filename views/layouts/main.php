@@ -45,6 +45,14 @@ $about = MAbout::find()->one();
     <?= Html::csrfMetaTags() ?>
     <title>首页</title>
     <?php $this->head() ?>
+    
+    <style type="text/css">
+    .input-group {
+
+            margin-top: -15px;
+        }
+    </style>
+
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -137,13 +145,24 @@ $about = MAbout::find()->one();
 
         }
 
+      
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
             'encodeLabels' => false,
             //'items' => $menuItems,
             'items' => [
+                ['label' => '<form class="navbar-form navbar-left" role="search"><div class="input-group"><input type="text" class="form-control" placeholder="Search"><span class="input-group-btn"><button class="btn btn-default" type="button"><span class="fa fa-search"></span></button></span></div></form>'],
+
                 ['label' => '首页', 'url' => ['/site/index']],
-                ['label' => '关于', 'url' => ['/site/about']],
+
+                //['label' => '关于', 'url' => ['/site/about']],
+                [
+                    'label' => '关于我们',
+                    'items' => [
+                        ['label' => '<i class="fa fa-globe"></i> 公司简介','url' => ['/site/about'],'linkOptions' => ['data-method' => 'post']],
+                        ['label' => '<i class="fa fa-star"></i> 招才纳士','url' => ['#'],'linkOptions' => ['data-method' => 'post']],
+                    ]
+                ], 
 
                 //['label' => '联系', 'url' => ['/site/contact']],
                 //['label' => '商品列表', 'url' => ['/site/client-goods-list']],
@@ -219,12 +238,13 @@ $about = MAbout::find()->one();
 
         <p align="center">
             <span class="glyphicon glyphicon-globe"></span>
-            <?= empty($about->com_name)?"":$about->com_name ?>&copy; <?= date('Y') ?> 
+            <?= empty($about->com_name)?"":$about->com_name ?>&copy; <?= date('Y') ?>   
+            <a href="map.php">导航</a>
             <br>
             <span class="glyphicon glyphicon-home"></span>
             <?= empty($about->com_addr)?"":$about->com_addr ?>
+          
             &nbsp;&nbsp;
-
             <span class="glyphicon glyphicon-earphone"></span>
             <a href="tel:<?= empty($about->com_tel)?'':$about->com_tel ?>">
             <?= empty($about->com_tel)?"":$about->com_tel ?>
