@@ -8,7 +8,6 @@ use yii\helpers\Url;
 use app\models\U;
 
 use app\models\User;
-use app\models\MGoods;
 use app\models\MOrder;
 use app\models\MGoodscat;
 
