@@ -47,10 +47,13 @@ $about = MAbout::find()->one();
     <?php $this->head() ?>
     
     <style type="text/css">
-    .input-group {
-
+        .input-group {
             margin-top: -15px;
         }
+
+        /* 回到顶部开始 */
+        .back-to-top { position: fixed; bottom: 100px; right: 2px; padding: 3px 8px; font-size: 24px; color: #666; display: none; }
+        /* 回到顶部结束 */
     </style>
 
 </head>
@@ -231,6 +234,8 @@ $about = MAbout::find()->one();
         ]) ?>
         <?= $content ?>
     </div>
+
+     <a class="back-to-top btn btn-default"><span class="fa fa-arrow-up"></span></a>
 </div>
 
 <footer class="footer">
@@ -261,3 +266,21 @@ $about = MAbout::find()->one();
 </body>
 </html>
 <?php $this->endPage() ?>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //alert("loaded!");
+            // back-to-top
+        $(window).scroll(function(){
+            if ($(this).scrollTop() > 500) {
+                $('.back-to-top').fadeIn();
+            } else {
+                $('.back-to-top').fadeOut();
+            }
+        });
+        $(".back-to-top").click(function(e) {
+            e.preventDefault();
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+        });
+    });
+</script>

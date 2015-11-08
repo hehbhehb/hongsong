@@ -124,6 +124,7 @@ class GoodsController extends Controller
 
             $model->save();
 
+            /*
             //邮件发送
             $mail = Yii::$app->mailer->compose();
             $mail->setTo('1443594559@qq.com');//send to gtsun
@@ -137,6 +138,7 @@ class GoodsController extends Controller
                 //echo '失败';
                 U::W("===========mail send failed ==============");
             }
+            */
 
             return $this->redirect(['index', 'pub_userid' => Yii::$app->user->identity->id, 'goods_kind' => 0]);
         } else {
